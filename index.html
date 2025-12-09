@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kalkulator Rat Kredytu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="calculator">
+    <h1>Kalkulator Rat Kredytu</h1>
+    <form id="loanForm">
+      <label for="priceInput">Cena zakupu (zł):</label>
+      <input type="number" id="priceInput" min="1000" step="1000" placeholder="np. 200000" required />
+
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="priceType" value="netto" checked /> Netto
+        </label>
+        <label>
+          <input type="radio" name="priceType" value="brutto" /> Brutto
+        </label>
+      </div>
+
+      <label for="downPayment">Wpłata własna (zł):</label>
+      <input type="number" id="downPayment" min="0" step="1000" placeholder="np. 40000" required />
+
+      <label for="interest">Oprocentowanie roczne (%):</label>
+      <input type="number" id="interest" min="0" step="0.1" placeholder="np. 6.5" required />
+
+      <label for="months">Liczba miesięcy:</label>
+      <input type="number" id="months" min="1" max="480" placeholder="np. 240" required />
+
+      <button type="submit">Oblicz ratę</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
