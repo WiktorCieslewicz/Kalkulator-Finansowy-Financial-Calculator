@@ -1,4 +1,4 @@
-// Stała: stawka VAT (23% — można zmienić, np. na 0.08 dla 8%)
+
 const VAT_RATE = 0.23;
 
 document.getElementById('loanForm').addEventListener('submit', function (e) {
@@ -10,7 +10,6 @@ document.getElementById('loanForm').addEventListener('submit', function (e) {
   const months = parseInt(document.getElementById('months').value);
   const priceType = document.querySelector('input[name="priceType"]:checked').value;
 
-  // Walidacja danych
   if (
     isNaN(priceInput) || isNaN(downPayment) || isNaN(interest) || isNaN(months) ||
     priceInput <= 0 || downPayment < 0 || interest < 0 || months <= 0
@@ -19,7 +18,6 @@ document.getElementById('loanForm').addEventListener('submit', function (e) {
     return;
   }
 
-  // Oblicz cenę brutto i netto
   let nettoPrice, bruttoPrice;
   if (priceType === 'netto') {
     nettoPrice = priceInput;
@@ -29,7 +27,6 @@ document.getElementById('loanForm').addEventListener('submit', function (e) {
     nettoPrice = priceInput / (1 + VAT_RATE);
   }
 
-  // Wpłata własna nie może przekraczać ceny brutto (to maksymalna wartość zakupu)
   if (downPayment > bruttoPrice) {
     document.getElementById('result').innerText = 'Wpłata własna nie może być większa niż cena brutto zakupu!';
     return;
@@ -44,7 +41,6 @@ document.getElementById('loanForm').addEventListener('submit', function (e) {
     return;
   }
 
-  // Obliczanie raty (system francuski)
   const monthlyRate = interest / 100 / 12;
   let monthlyPayment;
 
@@ -55,11 +51,11 @@ document.getElementById('loanForm').addEventListener('submit', function (e) {
     monthlyPayment = (loanAmount * monthlyRate * pow) / (pow - 1);
   }
 
-  // Wynik
   document.getElementById('result').innerHTML = `
     <p>Cena netto: <strong>${nettoPrice.toFixed(2)} zł</strong></p>
     <p>Cena brutto: <strong>${bruttoPrice.toFixed(2)} zł</strong></p>
     <p>Kwota kredytu (brutto − wpłata): <strong>${loanAmount.toFixed(2)} zł</strong></p>
     <p>Miesięczna rata: <strong>${monthlyPayment.toFixed(2)} zł</strong></p>
   `;
+
 });
